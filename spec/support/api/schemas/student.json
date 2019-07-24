@@ -1,0 +1,19 @@
+{
+  "type": "array",
+  "required" : [
+    "id",
+    "first_name",
+    "middle_name",
+    "last_name",
+    "email",
+    "gender"
+  ],
+  "properties" : {
+    "id" : { "type" : "integer" },
+    "first_name" : { "type" : "string" },
+    "middle_name" : { "type" : "string" },
+    "last_name" : { "type" : "string" },
+    "email" : { "type" : "string" },
+    "gender" : { "type" : "string" }
+  }
+}
