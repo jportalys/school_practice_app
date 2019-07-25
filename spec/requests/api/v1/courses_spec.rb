@@ -4,7 +4,7 @@ RSpec.describe "API::V1::Courses", type: :request do
   let(:school) { create(:school_user) }
   let(:course) { create(:course, school: school) }
 
-  describe "GET /courses" do
+  describe "GET school/:school_id/courses" do
     context "with authenticated user" do
       before(:each) do
         @auth_token = login(school.user)
@@ -31,7 +31,7 @@ RSpec.describe "API::V1::Courses", type: :request do
       end
     end
     
-    context "unathenticated course" do
+    context "with unathenticated user" do
       it "returns unathorized access" do
         get api_v1_school_courses_path(school)
         expect(response).to be_unauthorized
@@ -39,7 +39,7 @@ RSpec.describe "API::V1::Courses", type: :request do
     end
   end
 
-  describe "POST /courses" do
+  describe "POST school/:school_id/courses" do
     context "With authenticated user" do
       before(:each) do
         @auth_token = login(school.user)
@@ -65,7 +65,7 @@ RSpec.describe "API::V1::Courses", type: :request do
     end
   end
 
-  describe "PUT /courses/:id" do
+  describe "PUT school/:school_id/courses/:id" do
     let(:edited_course_info) { attributes_for(:course, title: "Edited title") }
 
     context "authenticated course" do
@@ -101,13 +101,13 @@ RSpec.describe "API::V1::Courses", type: :request do
     end
   end
 
-  describe "DELETE /courses/:id" do
-    context "authenticated course" do
+  describe "DELETE school/:school_id/courses/:id" do
+    context "with authenticated user" do
       before(:each) do
         @auth_token = login(school.user)
       end
 
-      it "destroys courses account" do
+      it "destroys the course" do
         course = create(:course, school: school)
 
         expect{
@@ -125,7 +125,7 @@ RSpec.describe "API::V1::Courses", type: :request do
       end
     end
     
-    context "unathenticated course" do
+    context "unathenticated user" do
       it "does not destroys courses account" do
         course = create(:course, school: school)
 
