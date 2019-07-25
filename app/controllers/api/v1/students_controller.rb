@@ -10,15 +10,17 @@ class API::V1::StudentsController < ApplicationController
 
   def create
     @student = Student.new(student_params)
-    if @student.save
+    @user = User.new(user_params.merge(account: @student))
+
+    if @student.save && @user.save
       render json: @student, status: :ok
     else
-      render json: { errors: @student.errors }, status: :unprocessable_entity
+      render json: { errors: @student.errors.merge!(@user.errors) }, status: :unprocessable_entity
     end
   end
 
-  def update    
-    if @student.update!(student_params)
+  def update
+    if @student.update(student_params)
       render json: @student, status: :ok
     else
       render json: { errors: @student.errors }, status: :unprocessable_entity      
@@ -26,7 +28,7 @@ class API::V1::StudentsController < ApplicationController
   end
 
   def destroy
-    if account_owner(@student)
+    if account_owner(@student.user)
       @student.destroy
       render json: { message: "Successfully deleted."}, status: :ok
     else
@@ -36,7 +38,11 @@ class API::V1::StudentsController < ApplicationController
 
   private
     def student_params
-      params.require(:student).permit(:email, :first_name, :middle_name, :last_name, :gender, :password, :password_confirmation)
+      params.require(:student).permit(:first_name, :middle_name, :last_name, :gender)
+    end
+
+    def user_params
+      params.require(:user).permit(:email, :password, :password_confirmation)
     end
 
     def find_student

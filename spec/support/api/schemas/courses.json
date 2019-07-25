@@ -1,0 +1,13 @@
+{
+    "type": "array",
+    "required" : [
+      "id",
+      "title",
+      "description"
+    ],
+    "properties" : {
+      "id" : { "type" : "integer" },
+      "title" : { "type" : "string" },
+      "description" : { "type" : "string" }
+    }
+  }

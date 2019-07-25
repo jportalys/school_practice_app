@@ -33,6 +33,7 @@ module Practice
     config.api_only = true
     config.generators do |g|
       g.test_framework :rspec,
+        controller_specs: false,
         view_specs: false,
         helper_specs: false
     end

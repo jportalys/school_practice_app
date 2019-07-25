@@ -1,11 +1,14 @@
 FactoryBot.define do
   factory :student do
-    email "johnoliver@test.com"
     first_name "John"
     middle_name "Umber"
     last_name "Oliver"
     gender "male"
-    password "password"
-    password_confirmation "password"
+
+    factory :student_user do
+      after(:create) do |student|
+        create(:user, account: student) 
+      end
+    end
   end
 end
