@@ -1,4 +1,4 @@
-Practice App
+#Practice App
 
 Tables
 - Users
@@ -14,3 +14,7 @@ Features
 - Student can enroll and unenroll to courses
 - Student can view their enrolled courses
 - School can view their created courses
+
+Todo
+- User logout
+- Student can see the school from which they are enrolled in through the courses
