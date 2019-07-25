@@ -29,7 +29,7 @@ class API::V1::CoursesController < ApplicationController
   def destroy
     if course_owner(@course)
       @course.destroy
-      render json: { message: "Successfully deleted."}, status: :ok
+      render json: { message: "Successfully deleted."}, status: :no_content
     else
       render json: { errors: @school.errors }, status: :unprocessable_entity
     end

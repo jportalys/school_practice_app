@@ -109,6 +109,11 @@ RSpec.describe "API::V1::Students", type: :request do
           delete api_v1_student_path(other_user.account), headers: { 'Authorization' => @auth_token }
         }.to change(Student, :count).by(0)
       end
+
+      it "returns no content status", current: true do
+        delete api_v1_student_path(student_user), headers: { 'Authorization' => @auth_token }
+        expect(response).to be_no_content
+      end
     end
     
     context "unathenticated student" do

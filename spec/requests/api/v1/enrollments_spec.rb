@@ -100,6 +100,13 @@ RSpec.describe "API::V1::Courses", type: :request do
         delete api_v1_unenroll_course_path(enrollment_id: "unregistered_enrollment"), headers: { 'Authorization' => @auth_token }
         expect(response).to have_http_status(422)
       end
+
+      it "returns no content status" do
+        enrollment = create(:enrollment, course: course, student: student)
+
+        delete api_v1_unenroll_course_path(enrollment), headers: { 'Authorization' => @auth_token }
+        expect(response).to be_no_content
+      end
     end
 
     context "with unauthenticated user", current: true do

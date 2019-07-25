@@ -30,7 +30,7 @@ class API::V1::StudentsController < ApplicationController
   def destroy
     if account_owner(@student.user)
       @student.destroy
-      render json: { message: "Successfully deleted."}, status: :ok
+      render json: { message: "Successfully deleted."}, status: :no_content
     else
       render json: { errors: @student.errors }, status: :unprocessable_entity
     end

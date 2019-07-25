@@ -24,7 +24,7 @@ class API::V1::EnrollmentsController < ApplicationController
     @enrollment = Enrollment.find_by_id(params[:enrollment_id])
 
     if @enrollment&.unenroll(@current_user.account)
-      render json: @enrollment.course, status: :ok
+      render json: @enrollment.course, status: :no_content
     else
       render json: { errors: "Unprocessabe entity" }, status: :unprocessable_entity
     end

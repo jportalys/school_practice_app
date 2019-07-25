@@ -123,6 +123,13 @@ RSpec.describe "API::V1::Courses", type: :request do
           delete api_v1_school_course_path(school, course), headers: { 'Authorization' => login(other_user) }
         }.to change(Course, :count).by(0)
       end
+
+      it "returns no content status" do
+        course = create(:course, school: school)
+
+        delete api_v1_school_course_path(school, course), headers: { 'Authorization' => @auth_token }
+        expect(response).to be_no_content
+      end
     end
     
     context "unathenticated user" do
