@@ -8,5 +8,4 @@ class Course < ApplicationRecord
   def enroll(student)
     Enrollment.create(course: self, student: student)
   end
-  
 end

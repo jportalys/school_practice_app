@@ -22,10 +22,10 @@ class API::V1::CoursesController < ApplicationController
     if @course.update(course_params)
       render json: @course, status: :ok
     else
-      render json: { errors: @course.errors }, status: :unprocessable_entity      
+      render json: { errors: @course.errors }, status: :unprocessable_entity
     end
   end
-  
+
   def destroy
     if course_owner(@course)
       @course.destroy

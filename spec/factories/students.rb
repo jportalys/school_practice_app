@@ -7,7 +7,7 @@ FactoryBot.define do
 
     factory :student_user do
       after(:create) do |student|
-        create(:user, account: student) 
+        create(:user, account: student)
       end
     end
   end

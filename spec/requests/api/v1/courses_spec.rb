@@ -30,7 +30,7 @@ RSpec.describe "API::V1::Courses", type: :request do
         expect(response).to be_successful
       end
     end
-    
+
     context "with unathenticated user" do
       it "returns unathorized access" do
         get api_v1_school_courses_path(school)
@@ -44,7 +44,7 @@ RSpec.describe "API::V1::Courses", type: :request do
       before(:each) do
         @auth_token = login(school.user)
       end
-    
+
       it "creates new course account" do
         expect {
           post api_v1_school_courses_path(school), params: { course: attributes_for(:course) }, headers: { 'Authorization' => @auth_token }
@@ -59,7 +59,7 @@ RSpec.describe "API::V1::Courses", type: :request do
       it "returns 401 on validation" do
         invalid_course_attributes = attributes_for(:course, title: "")
         post api_v1_school_courses_path(school), params: { course: invalid_course_attributes }, headers: { 'Authorization' => @auth_token }
-      
+
         expect(response).to have_http_status(422)
       end
     end
@@ -85,7 +85,7 @@ RSpec.describe "API::V1::Courses", type: :request do
         expect(course.title).to eq "Edited title"
       end
     end
-    
+
     context "unathenticated course" do
       it "does not update course info" do
         put api_v1_school_course_path(school, course), params: {course: edited_course_info}
@@ -95,7 +95,7 @@ RSpec.describe "API::V1::Courses", type: :request do
       end
 
       it "returns :unprocessable_entity status" do
-        put api_v1_school_course_path(school, course), params: {course: edited_course_info}        
+        put api_v1_school_course_path(school, course), params: {course: edited_course_info}
         expect(response).to be_unauthorized
       end
     end
@@ -131,7 +131,7 @@ RSpec.describe "API::V1::Courses", type: :request do
         expect(response).to be_no_content
       end
     end
-    
+
     context "unathenticated user" do
       it "does not destroys courses account" do
         course = create(:course, school: school)

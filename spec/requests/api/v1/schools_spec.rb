@@ -14,7 +14,7 @@ RSpec.describe "API::V1::Schools", type: :request do
     it "returns 401 on validation" do
       invalid_school_attributes = attributes_for(:school, name: "")
       post api_v1_schools_path, params: { school: invalid_school_attributes, user: attributes_for(:user) }
-      
+
       expect(response).to have_http_status(422)
     end
 
@@ -44,7 +44,7 @@ RSpec.describe "API::V1::Schools", type: :request do
         expect(response).to be_successful
       end
     end
-    
+
     context "unathenticated school" do
       it "does not update school info" do
         put api_v1_school_path(school_user), params: {school: edited_school_info}
@@ -85,7 +85,7 @@ RSpec.describe "API::V1::Schools", type: :request do
         expect(response).to be_no_content
       end
     end
-    
+
     context "unathenticated school" do
       it "does not destroys schools account" do
         user = create(:user, account: create(:school), email: "another_email@test.com")

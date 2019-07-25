@@ -23,7 +23,7 @@ class API::V1::StudentsController < ApplicationController
     if @student.update(student_params)
       render json: @student, status: :ok
     else
-      render json: { errors: @student.errors }, status: :unprocessable_entity      
+      render json: { errors: @student.errors }, status: :unprocessable_entity
     end
   end
 

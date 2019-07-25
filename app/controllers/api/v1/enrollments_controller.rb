@@ -1,5 +1,5 @@
 class API::V1::EnrollmentsController < ApplicationController
-  
+
   before_action :authorize_request
   before_action :set_student, only: :index
   before_action :check_student_account, except: :index
@@ -12,14 +12,14 @@ class API::V1::EnrollmentsController < ApplicationController
   def create
     @course = Course.find_by_id(params[:course_id])
     student = @current_user.account
-    
+
     if @course&.enroll(student)
       render json: @course, status: :ok
     else
       render json: { errors: "Unprocessabe entity" }, status: :unprocessable_entity
     end
   end
-  
+
   def destroy
     @enrollment = Enrollment.find_by_id(params[:enrollment_id])
 

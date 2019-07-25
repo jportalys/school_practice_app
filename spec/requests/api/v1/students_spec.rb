@@ -19,7 +19,7 @@ RSpec.describe "API::V1::Students", type: :request do
         expect(response).to be_successful
       end
     end
-    
+
     context "unathenticated student" do
       it "returns unathorized access" do
         get api_v1_students_path
@@ -44,7 +44,7 @@ RSpec.describe "API::V1::Students", type: :request do
     it "returns 401 on validation" do
       invalid_student_attributes = attributes_for(:student, first_name: "")
       post api_v1_students_path, params: { student: invalid_student_attributes, user: attributes_for(:user) }
-      
+
       expect(response).to have_http_status(422)
     end
 
@@ -74,7 +74,7 @@ RSpec.describe "API::V1::Students", type: :request do
         expect(student_user.first_name).to eq "Edi"
       end
     end
-    
+
     context "unathenticated student" do
       it "does not update student info" do
         put api_v1_student_path(student_user), params: {student: edited_student_info}
@@ -84,7 +84,7 @@ RSpec.describe "API::V1::Students", type: :request do
       end
 
       it "returns :unprocessable_entity status" do
-        put api_v1_student_path(student_user), params: {student: edited_student_info}        
+        put api_v1_student_path(student_user), params: {student: edited_student_info}
         expect(response).to be_unauthorized
       end
     end
@@ -115,7 +115,7 @@ RSpec.describe "API::V1::Students", type: :request do
         expect(response).to be_no_content
       end
     end
-    
+
     context "unathenticated student" do
       it "does not destroys students account" do
         user = create(:user, account: create(:student), email: "another_email@test.com")
