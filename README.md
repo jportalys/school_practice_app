@@ -1,24 +1,16 @@
-# README
+Practice App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Tables
+- Users
+- Students
+- Schools
+- Courses
+- Enrollments
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Features
+- Student can register an account
+- Schools can register an account
+- Schools can create courses
+- Student can enroll and unenroll to courses
+- Student can view their enrolled courses
+- School can view their created courses
