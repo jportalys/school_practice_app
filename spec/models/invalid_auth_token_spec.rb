@@ -10,7 +10,7 @@ RSpec.describe InvalidAuthToken, type: :model do
   describe "Class methods execute correctly" do
     it "raise ActiveRecord::RecordNotFound if token is in the blacklist" do
       InvalidAuthToken.create(token: "token")
-      expect{ described_class.crosscheck("token") }.to raise_exception(ActiveRecord::RecordNotFound)
+      expect{ described_class.crosscheck("token") }.to raise_exception(JWT::VerificationError)
     end
   end
 

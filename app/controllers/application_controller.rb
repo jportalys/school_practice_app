@@ -10,6 +10,8 @@ class ApplicationController < ActionController::API
       InvalidAuthToken.crosscheck(token)
       @decoded = JsonWebToken.decode(token)
       @current_user = User.find(@decoded[:user_id])
+    rescue JWT::VerificationError => e
+      render json: { errors: e.message }, status: :unauthorized
     rescue ActiveRecord::RecordNotFound => e
       render json: { errors: e.message }, status: :unauthorized
     rescue JWT::DecodeError => e
