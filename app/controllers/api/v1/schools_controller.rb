@@ -7,7 +7,9 @@ class API::V1::SchoolsController < ApplicationController
       @school = School.new(school_params)
       @user = User.new(user_params.merge(account: @school))
 
-      if @school.save && @user.save
+      if @school.valid? && @user.valid?
+        @school.save
+        @user.save
         render json: @school, status: :ok
       else
         render json: { errors: @school.errors.merge!(@user.errors) }, status: :unprocessable_entity

@@ -18,6 +18,18 @@ RSpec.describe "API::V1::Schools", type: :request do
       expect(response).to have_http_status(422)
     end
 
+    it "Does not save school when there is an error in user attributes", current: true do
+      expect{
+        post api_v1_schools_path, params: { school: attributes_for(:school), user: attributes_for(:user, email: "aaa") }
+      }.to change(School, :count).by(0)
+    end
+
+    it "Does not save user when there is an error in school attributes", current: true do
+      expect{
+        post api_v1_schools_path, params: { school: attributes_for(:school, name: ""), user: attributes_for(:user) }
+      }.to change(User, :count).by(0)
+    end
+
     it "returns the created course" do
       post api_v1_schools_path, params: { school: attributes_for(:school_user), user: attributes_for(:user) }
       expect(response).to match_response_schema('school')
