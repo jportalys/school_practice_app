@@ -16,5 +16,4 @@ Features
 - School can view their created courses
 
 Todo
-- User logout
 - Student can see the school from which they are enrolled in through the courses
