@@ -14,5 +14,6 @@ Rails.application.routes.draw do
   end
 
   post '/auth/login', to: 'authentication#login', as: :auth
+  post '/auth/logout', to: 'authentication#logout', as: :logout
   get '/*a', to: 'application#not_found'
 end
