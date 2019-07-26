@@ -27,7 +27,7 @@ gem 'figaro'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'active_model_serializers'
-
+gem 'whenever', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
@@ -35,7 +35,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.6.0'
   gem 'factory_bot_rails', '~> 4.10.0'
-  gem 'shoulda-callback-matchers', '~> 1.1.1'  
+  gem 'shoulda-callback-matchers', '~> 1.1.1'
   gem 'shoulda-matchers'
 end
 

@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2019_07_25_100712) do
 
   create_table "invalid_auth_tokens", force: :cascade do |t|
     t.string "token"
+    t.datetime "expiry"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

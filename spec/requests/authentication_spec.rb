@@ -15,7 +15,7 @@ RSpec.describe "Authentication", type: :request do
     end
   end
 
-  describe "GET /auth/login", current: true do
+  describe "GET /auth/login" do
     it "does not allow login when token is in the invalid_auth_token blacklist after logout" do
       #login user
       @auth_token = login(student.user)
