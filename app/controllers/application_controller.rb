@@ -7,9 +7,9 @@ class ApplicationController < ActionController::API
   def authorize_request
     token = request.headers['Authorization']
     begin
+      InvalidAuthToken.crosscheck(token)
       @decoded = JsonWebToken.decode(token)
       @current_user = User.find(@decoded[:user_id])
-      InvalidAuthToken.crosscheck(token)
     rescue ActiveRecord::RecordNotFound => e
       render json: { errors: e.message }, status: :unauthorized
     rescue JWT::DecodeError => e

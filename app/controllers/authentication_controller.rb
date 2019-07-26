@@ -20,7 +20,7 @@ class AuthenticationController < ApplicationController
     token = request.headers['Authorization']
 
     unless token.empty? || @current_user.nil?
-      invalid_auth_token = InvalidAuthToken.create(token: token)
+      invalid_auth_token = InvalidAuthToken.create(token: token, expiry: JsonWebToken.decode(token)[:exp])
       render json: { message: "You successfully logged out" }, status: :no_content
     else
       render json: { error: "unauthorized" }, status: :unauthorized
