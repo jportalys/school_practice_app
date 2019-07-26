@@ -41,14 +41,26 @@ RSpec.describe "API::V1::Students", type: :request do
       }.to change(User, :count).by(1)
     end
 
-    it "returns 401 on validation" do
+    it "returns 422 on validation" do
       invalid_student_attributes = attributes_for(:student, first_name: "")
       post api_v1_students_path, params: { student: invalid_student_attributes, user: attributes_for(:user) }
 
       expect(response).to have_http_status(422)
     end
 
-    it "returns the created course", current: true do
+    it "Does not save student when there is an error in user attributes" do
+      expect{
+        post api_v1_students_path, params: { student: attributes_for(:student), user: attributes_for(:user, email: "aaa") }
+      }.to change(Student, :count).by(0)
+    end
+
+    it "Does not save user when there is an error in student attributes" do
+      expect{
+        post api_v1_students_path, params: { student: attributes_for(:student, first_name: ""), user: attributes_for(:user) }
+      }.to change(User, :count).by(0)
+    end
+
+    it "returns the created course" do
       post api_v1_students_path, params: { student: attributes_for(:student), user: attributes_for(:user) }
       expect(response).to match_response_schema('student')
     end
@@ -110,7 +122,7 @@ RSpec.describe "API::V1::Students", type: :request do
         }.to change(Student, :count).by(0)
       end
 
-      it "returns no content status", current: true do
+      it "returns no content status" do
         delete api_v1_student_path(student_user), headers: { 'Authorization' => @auth_token }
         expect(response).to be_no_content
       end
